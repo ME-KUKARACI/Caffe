@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uludağ Kahve Durağı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="tsrm.css">
+</head>
+<body>
+
+<div class="top">
+  <a class="admin" href="#" id="admBtn">
+    <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    Yönetici<br>Paneli
+  </a>
+
+  <div class="top-inner">
+    <div class="top-row">
+      <nav class="side left" aria-label="Sayfa bölümleri">
+        <a class="nbtn" href="#menu">Menü</a>
+        <a class="nbtn" href="#hakkimizda">Hakkımızda</a>
+      </nav>
+
+      <a class="brand" href="#" aria-label="Ana sayfa">
+        <img src="logo.png" alt="Uludağ Kahve Durağı logosu">
+      </a>
+
+      <nav class="side right" aria-label="İletişim">
+  <a class="nbtn" href="#iletisim">İletişim</a>
+  <a class="nbtn" href="#iletisim">Konum</a>
+</nav>
+    </div>
+
+    <h1>Uludağ Kahve Durağı</h1>
+  </div>
+</div>
+
+<div class="band" id="promo">Öğrenci kartına sabah 10'a kadar %10 indirim</div>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <article class="daily">
+  <div class="daily-head">
+    <span class="daily-tag">Bugün</span>
+    <h2>Günün tatlısı</h2>
+  </div>
+  <div class="daily-photo">
+    <img id="dImg" src="tatlı.jpeg" alt="Çikolatalı brownie">
+    <span class="daily-price" id="dPrice">55₺</span>
+  </div>
+  <p class="daily-name" id="dName">Çikolatalı brownie</p>
+</article>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <h2 class="title">Menü</h2>
+      <div class="menu-grid">
+        <h3>Sıcak içecekler</h3>
+        <div class="item"><div><b>Espresso</b><span>Çift shot, yoğun gövde</span></div><div class="price">70 ₺</div></div>
+        <div class="item"><div><b>Latte</b><span>Espresso ve buharla ısıtılmış süt</span></div><div class="price">120 ₺</div></div>
+        <div class="item"><div><b>Filtre kahve</b><span>Günün çekirdeği, V60</span></div><div class="price">95 ₺</div></div>
+        <div class="item"><div><b>Türk kahvesi</b><span>Közde, lokum ile</span></div><div class="price">80 ₺</div></div>
+
+        <h3>Soğuk içecekler</h3>
+        <div class="item"><div><b>Iced latte</b><span>Buz, espresso, süt</span></div><div class="price">130 ₺</div></div>
+        <div class="item"><div><b>Cold brew</b><span>16 saat demlenir</span></div><div class="price">125 ₺</div></div>
+
+        <h3>Tatlılar</h3>
+        <div class="item"><div><b>Çikolatalı brownie</b><span>Günlük taze</span></div><div class="price">55 ₺</div></div>
+        <div class="item"><div><b>San Sebastian cheesecake</b><span>Dilim</span></div><div class="price">150 ₺</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="hakkimizda">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="title">Küçük bir kahveci, büyük bir özen.</h2>
+        <p>2023 yılında açtığım mütevazi, sıcak kafemde şimdimizin ve geleceğimizin ışığı olan öğrencilerimizi ve akademisyenlerimizi ağırlamaktan mutluluk duyuyorum.</p>
+        <p>Buraya acele etmeden gelebilir, kitabını açıp bir fincan kahveyle oturabilirsin.</p>
+      </div>
+      <div class="photo"><img  src="foto.jpeg" ></div>
+    </div>
+  </section>
+
+  <section class="visit" id="iletisim">
+    <div class="wrap">
+      <div class="visit-box">
+        <div class="map">
+  <iframe src="https://www.google.com/maps?q=Uludağ+Üniversitesi+Görükle+Kampüsü&output=embed" title="Uludağ Kahve Durağı konumu" loading="lazy" allowfullscreen></iframe>
+</div>
+
+        <div><h3>Adres</h3><p>• Görükle Kampüsü, Uludağ Üniversitesi<br>• Nilüfer, Bursa</p></div>
+        <div><h3>Çalışma saatleri</h3><p>• Hafta içi 08:00 – 21:00<br>• Hafta sonu 09:00 – 23:00</p></div>
+        <div><h3>İletişim</h3><p>• 0 224 123 45 67<br>• uludagkahveduragi@gmail.com<br>• Instagram: @uludagkahveduragi</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Uludağ Kahve Durağı. Tüm hakları saklıdır.</div>
+</footer>
+<dialog id="admDlg" aria-label="Yönetici paneli">
+  <div class="adm-in">
+    <div class="adm-hd"><h3>Yönetici paneli</h3><button class="adm-x" type="button" data-close>Kapat</button></div>
+
+    <div id="lockV">
+      <label for="pin">PIN kodu</label>
+      <input id="pin" type="password" inputmode="numeric" autocomplete="off">
+      <button class="adm-btn" id="login" type="button">Giriş yap</button>
+    </div>
+
+    <div id="formV" hidden>
+      <label for="fN">Günün tatlısı</label>
+      <input id="fN" type="text" maxlength="40">
+      <label for="fP">Fiyat (₺)</label>
+      <input id="fP" type="number" inputmode="numeric" min="0" max="9999">
+      <label>Fotoğraf</label>
+      <img class="adm-thumb" id="fT" alt="Seçili tatlı fotoğrafı">
+      <input id="fF" type="file" accept="image/*" hidden>
+      <button class="adm-btn o" id="pick" type="button">Fotoğrafı değiştir</button>
+      <label for="fC">İndirim bandı yazısı</label>
+      <input id="fC" type="text" maxlength="80" placeholder="Boş bırakırsan bant gizlenir">
+      <button class="adm-btn" id="save" type="button">Kaydet</button>
+      <button class="adm-btn o" id="reset" type="button">İlk haline döndür</button>
+    </div>
+
+    <p class="adm-msg" id="admMsg" role="status"></p>
+  </div>
+</dialog>
+
+<div id="toast" role="status"></div>
+<script src="giris.js"></script>
+</body>
+</html>
