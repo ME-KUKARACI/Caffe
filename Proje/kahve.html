@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uludağ Kahve Durağı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* ===== RENKLER VE YAZI TİPİ ===== */
+:root{
+  --bg:#E8ECEF;
+  --ink:#0A3A29;
+  --accent:#0A3A29;
+  --green:#0B4A34;
+  --soft:#FFFFFF;
+  --muted:#6B5F58;
+  --font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:17px}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+/* ===== YEŞİL ÜST KISIM ===== */
+.top{position:relative;background:var(--green);padding:24px 24px 28px;text-align:center}
+.top-inner{max-width:960px;margin:0 auto}
+.top-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:24px}
+.side{display:flex;gap:24px;align-items:center}
+.side.left{justify-content:flex-end}
+.side.right{justify-content:flex-start}
+.nbtn{
+  width:160px;text-align:center;
+  text-decoration:none;
+  background:#F4EDD8;
+  color:var(--green);
+  border-radius:999px;
+  padding:12px 0;
+  font-weight:800;
+  font-size:.95rem;
+  letter-spacing:.02em;
+  white-space:nowrap;
+  box-shadow:0 3px 0 rgba(0,0,0,.25);
+  transition:transform .15s, background .15s, box-shadow .15s;
+}
+.nbtn:hover{background:#E8D69E;transform:translateY(-2px);box-shadow:0 5px 0 rgba(0,0,0,.25)}
+.nbtn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.admin{position:absolute;right:20px;top:16px;text-decoration:none;text-align:center;font-size:.75rem;font-weight:600;line-height:1.2;color:#F4EDD8}
+.brand{display:block;width:150px;height:150px;margin:0 auto}
+.brand img{width:100%;height:100%;object-fit:contain;display:block}
+.top h1{font-size:clamp(1.9rem,8.5vw,3rem);line-height:1.05;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;color:#F4EDD8;margin:14px 0 0}
+.burger{display:block;width:26px;margin:0 auto 6px}
+.burger i{display:block;height:3px;background:#F4EDD8;border-radius:2px;margin:5px 0}
+.band{background:#E8D69E;color:#0A3A29;text-align:center;font-weight:800;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;padding:10px 16px}
+
+/* ===== HEADER ===== */
+header{background:#fff;position:sticky;top:0;z-index:20;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;height:88px;padding:0 24px}
+.logo{display:block;width:72px;height:72px}
+.logo img{width:100%;height:100%;object-fit:contain;display:block}
+.links{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+.links a{text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.links a:hover{color:var(--green)}
+.actions{justify-self:end;display:flex;align-items:center;gap:12px}
+.loc{text-decoration:none;font-weight:600;font-size:.95rem;margin-right:6px}
+.pill{text-decoration:none;font-weight:600;font-size:.95rem;padding:9px 20px;border-radius:999px;border:1px solid transparent;white-space:nowrap;transition:opacity .2s}
+.pill:hover{opacity:.85}
+.pill.outline{border-color:var(--green);color:var(--green)}
+.pill.dark{background:#000;color:#fff}
+.pill.green{background:var(--green);color:#fff}
+/* ===== YÖNETİCİ PANELİ ===== */
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+.daily-name{padding:12px 8px 4px;color:#fff;font-weight:700;text-align:center}
+dialog{margin:auto auto 0;border:0;padding:0;width:min(100%,480px);max-width:100%;max-height:92%;background:#fff;color:var(--ink);border-radius:28px 28px 0 0;overflow:auto}
+dialog::backdrop{background:#0009}
+.adm-in{padding:18px 20px calc(24px + env(safe-area-inset-bottom,0px))}
+.adm-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.adm-hd h3{margin:0;font-size:22px;font-weight:800}
+.adm-x{background:none;border:0;color:var(--muted);font:inherit;font-size:15px;font-weight:700;min-height:44px;padding:0 4px;cursor:pointer}
+.adm-in label{display:block;font-weight:700;font-size:14px;margin:16px 0 6px}
+.adm-in input[type=text],.adm-in input[type=password],.adm-in input[type=number]{width:100%;min-height:50px;border:1.5px solid #ddd8cc;border-radius:14px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px;padding:0 14px}
+.adm-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;display:block;background:var(--bg)}
+.adm-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin-top:12px;background:var(--green);color:#fff;border:2px solid var(--green);border-radius:999px;font:inherit;font-size:16px;font-weight:700;cursor:pointer}
+.adm-btn.o{background:none;color:var(--green)}
+.adm-msg{color:#c0392b;font-size:14px;min-height:20px;margin:8px 0 0}
+
+/* ===== GÜNÜN TATLISI ===== */
+.hero{padding:48px 0 96px}
+.daily{max-width:460px;margin:0 auto;background:var(--green);border-radius:24px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.daily-head{display:flex;align-items:center;gap:14px;background:#fff;border-radius:16px 16px 0 0;padding:14px 18px}
+.daily-tag{border:2px solid var(--green);color:var(--green);font-weight:800;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px}
+.daily-head h2{font-size:1.1rem;letter-spacing:.04em;text-transform:uppercase;margin:0;color:var(--ink)}
+.daily-photo{position:relative;border-radius:0 0 16px 16px;overflow:hidden;aspect-ratio:4/3;background:#fff}
+.daily-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.daily-price{position:absolute;right:14px;bottom:14px;background:#fff;color:var(--green);font-weight:800;font-size:1.1rem;padding:8px 16px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+
+/* ===== MENÜ ===== */
+.menu{background:var(--ink);color:#fff;padding:88px 0}
+h2.title{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.03em;line-height:1.05;margin-bottom:40px}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px 64px}
+.item{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+.item b{display:block;font-size:1.1rem}
+.item span{color:#CFC6C0;font-size:.95rem}
+.price{color:#fff;font-weight:800;white-space:nowrap}
+.menu h3{grid-column:1/-1;color:#fff;font-size:1.1rem;margin-top:24px}
+
+/* ===== HAKKIMIZDA ===== */
+.about{padding:96px 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.about p{color:var(--muted);margin-bottom:16px;max-width:52ch}
+.photo{aspect-ratio:4/5;background:var(--accent);border-radius:20px;display:grid;place-items:center;text-align:center;padding:24px;font-weight:600;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+/* ===== HARİTA ===== */
+.map{grid-column:1/-1;width:100%;margin-top:8px;border-radius:20px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.map iframe{display:block;width:100%;height:420px;border:0}
+@media(max-width:600px){.map iframe{height:300px}}
+/* ===== İLETİŞİM ===== */
+.visit{padding:0 0 96px}
+.visit-box{background:var(--soft);border-radius:20px;padding:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}
+.visit h3{margin-bottom:8px}
+.visit p{color:var(--muted)}
+
+footer{padding:32px 0;border-top:1px solid rgba(42,29,23,.15);color:var(--muted);font-size:.95rem}
+
+/* ===== TELEFON ===== */
+@media(max-width:900px){
+  .links,.loc{display:none}
+  .bar{grid-template-columns:auto 1fr;gap:12px}
+  .actions{grid-column:2}
+}
+@media(max-width:760px){
+  .about-grid{grid-template-columns:1fr}
+  .visit-box{padding:32px 24px}
+}
+@media(max-width:600px){
+  .bar{padding:0 12px;height:76px}
+  .logo{width:56px;height:56px}
+  .pill{padding:8px 12px;font-size:.85rem}
+  .pill.outline{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+@media(max-width:860px){
+  .top{padding:64px 12px 24px}
+  .admin{right:12px;top:10px}
+  .top-row{gap:10px}
+  .side{flex-direction:column;align-items:stretch;gap:10px}
+  .nbtn{width:auto;padding:10px 4px;font-size:.8rem}
+  .brand{width:110px;height:110px}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="admin" href="#" id="admBtn">
+    <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    Yönetici<br>Paneli
+  </a>
+
+  <div class="top-inner">
+    <div class="top-row">
+      <nav class="side left" aria-label="Sayfa bölümleri">
+        <a class="nbtn" href="#menu">Menü</a>
+        <a class="nbtn" href="#hakkimizda">Hakkımızda</a>
+      </nav>
+
+      <a class="brand" href="#" aria-label="Ana sayfa">
+        <img src="logo.png" alt="Uludağ Kahve Durağı logosu">
+      </a>
+
+      <nav class="side right" aria-label="İletişim">
+  <a class="nbtn" href="#iletisim">İletişim</a>
+  <a class="nbtn" href="#iletisim">Konum</a>
+</nav>
+    </div>
+
+    <h1>Uludağ Kahve Durağı</h1>
+  </div>
+</div>
+
+<div class="band" id="promo">Öğrenci kartına sabah 10'a kadar %10 indirim</div>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <article class="daily">
+  <div class="daily-head">
+    <span class="daily-tag">Bugün</span>
+    <h2>Günün tatlısı</h2>
+  </div>
+  <div class="daily-photo">
+    <img id="dImg" src="tatlı.jpeg" alt="Çikolatalı brownie">
+    <span class="daily-price" id="dPrice">55₺</span>
+  </div>
+  <p class="daily-name" id="dName">Çikolatalı brownie</p>
+</article>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <h2 class="title">Menü</h2>
+      <div class="menu-grid">
+        <h3>Sıcak içecekler</h3>
+        <div class="item"><div><b>Espresso</b><span>Çift shot, yoğun gövde</span></div><div class="price">70 ₺</div></div>
+        <div class="item"><div><b>Latte</b><span>Espresso ve buharla ısıtılmış süt</span></div><div class="price">120 ₺</div></div>
+        <div class="item"><div><b>Filtre kahve</b><span>Günün çekirdeği, V60</span></div><div class="price">95 ₺</div></div>
+        <div class="item"><div><b>Türk kahvesi</b><span>Közde, lokum ile</span></div><div class="price">80 ₺</div></div>
+
+        <h3>Soğuk içecekler</h3>
+        <div class="item"><div><b>Iced latte</b><span>Buz, espresso, süt</span></div><div class="price">130 ₺</div></div>
+        <div class="item"><div><b>Cold brew</b><span>16 saat demlenir</span></div><div class="price">125 ₺</div></div>
+
+        <h3>Tatlılar</h3>
+        <div class="item"><div><b>Çikolatalı brownie</b><span>Günlük taze</span></div><div class="price">55 ₺</div></div>
+        <div class="item"><div><b>San Sebastian cheesecake</b><span>Dilim</span></div><div class="price">150 ₺</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="hakkimizda">
+    <div class="wrap about-grid">
+      <div>
+        <h2 class="title">Küçük bir kahveci, büyük bir özen.</h2>
+        <p>2023 yılında açtığım mütevazi, sıcak kafemde şimdimizin ve geleceğimizin ışığı olan öğrencilerimizi ve akademisyenlerimizi ağırlamaktan mutluluk duyuyorum.</p>
+        <p>Buraya acele etmeden gelebilir, kitabını açıp bir fincan kahveyle oturabilirsin.</p>
+      </div>
+      <div class="photo"><img  src="foto.jpeg" ></div>
+    </div>
+  </section>
+
+  <section class="visit" id="iletisim">
+    <div class="wrap">
+      <div class="visit-box">
+        <div class="map">
+  <iframe src="https://www.google.com/maps?q=Uludağ+Üniversitesi+Görükle+Kampüsü&output=embed" title="Uludağ Kahve Durağı konumu" loading="lazy" allowfullscreen></iframe>
+</div>
+
+        <div><h3>Adres</h3><p>• Görükle Kampüsü, Uludağ Üniversitesi<br>• Nilüfer, Bursa</p></div>
+        <div><h3>Çalışma saatleri</h3><p>• Hafta içi 08:00 – 21:00<br>• Hafta sonu 09:00 – 23:00</p></div>
+        <div><h3>İletişim</h3><p>• 0 224 123 45 67<br>• uludagkahveduragi@gmail.com<br>• Instagram: @uludagkahveduragi</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Uludağ Kahve Durağı. Tüm hakları saklıdır.</div>
+</footer>
+<dialog id="admDlg" aria-label="Yönetici paneli">
+  <div class="adm-in">
+    <div class="adm-hd"><h3>Yönetici paneli</h3><button class="adm-x" type="button" data-close>Kapat</button></div>
+
+    <div id="lockV">
+      <label for="pin">PIN kodu</label>
+      <input id="pin" type="password" inputmode="numeric" autocomplete="off">
+      <button class="adm-btn" id="login" type="button">Giriş yap</button>
+    </div>
+
+    <div id="formV" hidden>
+      <label for="fN">Günün tatlısı</label>
+      <input id="fN" type="text" maxlength="40">
+      <label for="fP">Fiyat (₺)</label>
+      <input id="fP" type="number" inputmode="numeric" min="0" max="9999">
+      <label>Fotoğraf</label>
+      <img class="adm-thumb" id="fT" alt="Seçili tatlı fotoğrafı">
+      <input id="fF" type="file" accept="image/*" hidden>
+      <button class="adm-btn o" id="pick" type="button">Fotoğrafı değiştir</button>
+      <label for="fC">İndirim bandı yazısı</label>
+      <input id="fC" type="text" maxlength="80" placeholder="Boş bırakırsan bant gizlenir">
+      <button class="adm-btn" id="save" type="button">Kaydet</button>
+      <button class="adm-btn o" id="reset" type="button">İlk haline döndür</button>
+    </div>
+
+    <p class="adm-msg" id="admMsg" role="status"></p>
+  </div>
+</dialog>
+
+<div id="toast" role="status"></div>
+<script src="giris.js"></script>
+</body>
+</html>
